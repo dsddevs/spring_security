@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("api")
 @AllArgsConstructor
-public class UserController {
+public class AdminController {
 
     private IUserDataService userDataService;
 
-    @GetMapping("/user")
-    @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_ADMIN')")
-    public ResponseEntity<String> getUser(@AuthenticationPrincipal UserDetails details) {
+    @GetMapping("/admin")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    public ResponseEntity<String> getAdmin(@AuthenticationPrincipal UserDetails details) {
         String userDetails = userDataService.getUserDetails(details);
         return ResponseEntity.ok(userDetails);
     }

@@ -10,7 +10,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 
 /*Типичная настройка защиты веб-приложения для RESTFull API*/
-
 @Configuration
 @EnableWebSecurity
 public class SpringSecurity {
@@ -19,10 +18,9 @@ public class SpringSecurity {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(
                         (api) -> api.requestMatchers("/").permitAll()
-                                .requestMatchers("api/user/**", "api/admin/**").hasAnyRole("USER", "ADMIN")
+                                .requestMatchers("api/user/**").hasAnyRole("USER", "ADMIN")
                                 .requestMatchers("api/admin/**").hasRole("ADMIN")
                                 .anyRequest().authenticated()
-
                 )
                 .csrf(AbstractHttpConfigurer::disable)
                 .httpBasic(Customizer.withDefaults())

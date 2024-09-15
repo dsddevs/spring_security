@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Configuration
-public class UserConfig {
+public class UserDetailsConfig {
 
    @Value("${user.password}")
    private String userPassword;
@@ -41,7 +41,7 @@ public class UserConfig {
         return User
                 .withUsername(login)
                 .password(password)
-                .roles(role)
+                .authorities("ROLE_" + role)
                 .build();
     }
 
