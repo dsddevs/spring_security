@@ -1,5 +1,7 @@
 # Compiled class file
 *.class
+.idea
+./spring_security_1/.idea
 
 # Log file
 *.log
