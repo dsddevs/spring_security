@@ -41,7 +41,7 @@ public class SpringSecurityIntegrationTest {
 	@WithMockUser(roles = "USER")
 	public void testAdminEndpointWithUserRoleShouldBeForbidden() throws Exception {
 		mockMvc.perform(get("/api/admin"))
-				.andExpect(status().isForbidden());  // Ожидаем статус 403
+				.andExpect(status().isForbidden());
 	}
 
 	@Test
