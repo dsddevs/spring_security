@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-      name: spring_security
+      name: spring_security_basic_authentication
   servlet:
     multipart:
       max-file-size: 100MB
