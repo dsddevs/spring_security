@@ -3,6 +3,9 @@
 ## PROJECT STRUCTURE MAP
 ![Screenshot (868)](https://github.com/user-attachments/assets/adaa7c62-66aa-4095-b218-21063e3c805a)
 
+## PROJECT OPERATIONS VIEW
+![Слайд1](https://github.com/user-attachments/assets/718a6120-e26a-422c-ad13-d46b6fec7f6a)
+
 > POST REQUEST: /api/signup
 ![signup](https://github.com/user-attachments/assets/6215d19f-ad91-41ad-a6df-9460aa218a09)
 
