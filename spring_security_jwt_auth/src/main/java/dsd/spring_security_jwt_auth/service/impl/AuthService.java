@@ -31,16 +31,16 @@ public class AuthService implements IAuthenticationService, IUserChecker {
         try {
             var user = registerUser(request);
             var savedUser = userRepo.save(user);
-            var jwtToken = generator.generateToken(user);
+            var accessToken = generator.generateToken(user);
             var refreshToken = generator.generateRefreshToken(user);
 
-            jwtManager.saveUserToken(savedUser, jwtToken);
+            jwtManager.saveUserToken(savedUser, accessToken);
 
             return AuthResponseDto
                     .builder()
                     .success(true)
                     .message("SUCCESS: User registered")
-                    .accessToken(jwtToken)
+                    .accessToken(accessToken)
                     .refreshToken(refreshToken)
                     .build();
 
