@@ -1,45 +1,40 @@
-package dsd.spring_security.model.entity;
+package dsd.spring_security_jwt_auth.model.entity;
 
-import dsd.spring_security.model.RoleType;
+import dsd.spring_security_jwt_auth.types.TokenType;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
-import org.springframework.security.core.GrantedAuthority;
 
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 @Getter
 @Setter
 @ToString
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "tokens")
 @Entity
-@Table(name = "`roles`")
-public class RoleEntity implements GrantedAuthority {
+public class TokenEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue
+    public Integer id;
+
+    @Column(unique = true, nullable = false)
+    public String token;
 
     @Enumerated(EnumType.STRING)
-    private RoleType roleType;
+    public TokenType tokenType;
 
-    @OneToMany(mappedBy = "role", cascade = CascadeType.ALL, orphanRemoval = true)
+    public boolean revoked;
+
+    public boolean expired;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
     @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    private Set<UserEntity> users = new HashSet<>();
-
-    public static RoleEntity setRole(RoleType type) {
-        return RoleEntity.builder().roleType(type).build();
-    }
-
-    @Override
-    public String getAuthority() {
-        return roleType.name();
-    }
+    public UserEntity user;
 
     @Override
     public final boolean equals(Object o) {
@@ -48,8 +43,8 @@ public class RoleEntity implements GrantedAuthority {
         Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
         Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
         if (thisEffectiveClass != oEffectiveClass) return false;
-        RoleEntity that = (RoleEntity) o;
-        return getId() != null && Objects.equals(getId(), that.getId());
+        TokenEntity token = (TokenEntity) o;
+        return getId() != null && Objects.equals(getId(), token.getId());
     }
 
     @Override
@@ -57,3 +52,5 @@ public class RoleEntity implements GrantedAuthority {
         return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode() : getClass().hashCode();
     }
 }
+
+

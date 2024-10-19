@@ -1,0 +1,41 @@
+spring:
+  application:
+    name: springboot_security_jwt_auth
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/jwt_security
+    username: postgres
+    password: password
+    hikari:
+      schema: jwt_security_schema
+      connection-init-sql: CREATE SCHEMA IF NOT EXISTS jwt_security_schema
+      connection-timeout: 10000
+  jpa:
+    open-in-view: false
+    database: postgresql
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    generate-ddl: true
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+logging:
+  level:
+    org.springframework: INFO
+    org.hibernate: INFO
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.springframework.security: DEBUG
+    dsd.spring_security_jwt_auth: DEBUG
+
+jwt:
+  secret-key: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+  token-expiration: 86400000
+  refresh-token-expiration: 604800000
+
+server:
+  port: 8282
+

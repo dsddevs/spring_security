@@ -22,16 +22,12 @@ public class UserDataService implements IUserDataService {
 
     @Transactional
     @Override
-    public UserDto createUserDetails(String username, String password, RoleEntity role) {
-        try {
-            UserEntity existingUser = userRepo.findByUsername(username);
-            if (existingUser != null) throw new RuntimeException("Error: Username already exists in db!");
-            UserEntity user = new UserEntity(username, passwordEncoder.encode(password), role);
-            userRepo.save(user);
-            return new UserDto(user.getUsername(), user.getPassword(), user.getRole().getRoleType());
-        } catch (RuntimeException e) {
-            throw e;
-        }
+    public void createUserDetails(String username, String password, RoleEntity role) {
+        UserEntity user = userRepo.findByUsername(username);
+        if (user != null) throw new RuntimeException("Error: Username already exists in db!");
+        user = new UserEntity(username, passwordEncoder.encode(password), role);
+        userRepo.save(user);
+        new UserDto(user.getUsername(), user.getPassword(), user.getRole().getRoleType());
     }
 
     @Override
