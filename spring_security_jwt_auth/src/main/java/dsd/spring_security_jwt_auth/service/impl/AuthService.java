@@ -62,17 +62,17 @@ public class AuthService implements IAuthenticationService, IUserChecker {
             authManager.authenticate(userAuthToken);
 
             var user = checkUserExisting(email, userRepo);
-            var jwtToken = generator.generateToken(user);
+            var accessToken = generator.generateToken(user);
             var refreshToken = generator.generateRefreshToken(user);
 
             jwtManager.revokeAllUserTokens(user);
-            jwtManager.saveUserToken(user, jwtToken);
+            jwtManager.saveUserToken(user, accessToken);
 
             return AuthResponseDto
                     .builder()
                     .success(true)
                     .message("SUCCESS: User authenticated")
-                    .accessToken(jwtToken)
+                    .accessToken(accessToken)
                     .refreshToken(refreshToken)
                     .build();
         } catch (Exception e) {
