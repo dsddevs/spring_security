@@ -15,7 +15,7 @@ import java.io.IOException;
 
 @AllArgsConstructor
 @Service
-public class RefresherToken implements IRefresherToken, IUserChecker {
+public class RefresherTokenService implements IRefresherToken, IUserChecker {
 
     private final IExtractorService extractor;
     private final IValidatorService jwtValidator;
