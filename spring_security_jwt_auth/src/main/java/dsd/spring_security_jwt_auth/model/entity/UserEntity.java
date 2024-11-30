@@ -39,6 +39,9 @@ public class UserEntity implements UserDetails {
     @Column(nullable = false)
     private RoleType role;
 
+    @OneToMany(mappedBy = "user")
+    private List<TokenEntity> tokens;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.name()));
