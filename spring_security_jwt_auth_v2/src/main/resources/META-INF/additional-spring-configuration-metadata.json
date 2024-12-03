@@ -1,0 +1,14 @@
+{
+  "properties": [
+    {
+      "name": "spring.mvc.throw-exception-when-servlet-resource-not-found",
+      "type": "java.lang.String",
+      "description": "Description for spring.mvc.throw-exception-when-servlet-resource-not-found."
+    },
+    {
+      "name": "api.noAuthUrls",
+      "type": "java.lang.String",
+      "description": "Description for api.noAuthUrls."
+    }
+  ]
+}
