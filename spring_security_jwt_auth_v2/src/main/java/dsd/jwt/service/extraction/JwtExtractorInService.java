@@ -5,13 +5,11 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.function.Function;
 
-@Slf4j
 @RequiredArgsConstructor
 @Service
 public class JwtExtractorInService implements JwtExtractorService {
@@ -31,7 +29,6 @@ public class JwtExtractorInService implements JwtExtractorService {
     @Override
     public String extractJwtByRequest(HttpServletRequest request) {
         String authHeader = request.getHeader("Authorization");
-        log.info("AUTHENTICATION HEADER (Jwt Extractor): {}", authHeader);
         boolean isJwtExists = authHeader != null && authHeader.startsWith("Bearer ");
         return isJwtExists ? authHeader.substring(7).trim() : null;
     }
